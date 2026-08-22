@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 
 import { View } from "@/components/Themed";
-import { Select } from "heroui-native";
+import { Description, Input, Label, TextField } from "heroui-native";
+import { useState } from "react";
 
 const data = Array.from({ length: 50 }, (_, i) => ({
   value: i.toString(),
@@ -9,26 +10,22 @@ const data = Array.from({ length: 50 }, (_, i) => ({
 }));
 
 export default function TabOneScreen() {
+  const [email, setEmail] = useState("");
   return (
     <View style={styles.container}>
-      <Select presentation="bottom-sheet">
-        <Select.Trigger className="w-[300px]">
-          <Select.Value placeholder="Choose an option" />
-          <Select.TriggerIndicator />
-        </Select.Trigger>
-        <Select.Portal>
-          <Select.Overlay />
-          <Select.Content presentation="bottom-sheet">
-            {data.map((item) => (
-              <Select.Item
-                key={item.value}
-                value={item.value}
-                label={item.label}
-              />
-            ))}
-          </Select.Content>
-        </Select.Portal>
-      </Select>
+      <TextField isRequired>
+        <Label>Email</Label>
+        <Input
+          placeholder="Enter your email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Description>
+          We'll never share your email with anyone else.
+        </Description>
+      </TextField>
     </View>
   );
 }
