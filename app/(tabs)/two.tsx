@@ -1,60 +1,39 @@
 import { StyleSheet } from "react-native";
 
-import EditScreenInfo from "@/components/EditScreenInfo";
-import { Text, View } from "@/components/Themed";
+import { View } from "@/components/Themed";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { Stack } from "expo-router";
-import { Menu, Typography } from "heroui-native";
+import { Select } from "heroui-native";
 
 export default function TabTwoScreen() {
   return (
     <>
-      <Stack.Screen
-        options={{
-          headerRight: () => (
-            <Menu>
-              <Menu.Trigger>
-                <Typography.Heading type="h5">选项</Typography.Heading>
-              </Menu.Trigger>
-              <Menu.Portal>
-                <Menu.Overlay className="bg-black/50" />
-                <Menu.Content presentation="popover" width={300}>
-                  <Menu.Group selectedKeys={["opt1"]}>
-                    <Menu.Item id="opt1" className="flex-col">
-                      <Menu.ItemIndicator variant="checkmark" />
-                      <Menu.ItemTitle>选项1</Menu.ItemTitle>
-                      <Menu.ItemDescription>
-                        这是一个选项1的描述
-                      </Menu.ItemDescription>
-                    </Menu.Item>
-                    <Menu.Item id="opt2">
-                      <Menu.ItemIndicator />
-                      <Menu.ItemTitle>选项2</Menu.ItemTitle>
-                      <Menu.ItemDescription>
-                        这是一个选项2的描述
-                      </Menu.ItemDescription>
-                    </Menu.Item>
-                    <Menu.Item id="opt3">
-                      <Menu.ItemIndicator />
-                      <Menu.ItemTitle>选项3</Menu.ItemTitle>
-                      <Menu.ItemDescription>
-                        这是一个选项3的描述
-                      </Menu.ItemDescription>
-                    </Menu.Item>
-                  </Menu.Group>
-                </Menu.Content>
-              </Menu.Portal>
-            </Menu>
-          ),
-        }}
-      />
+      <Stack.Screen options={{}} />
       <View style={styles.container}>
-        <Text style={styles.title}>Tab Two</Text>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
-        <EditScreenInfo path="app/(tabs)/two.tsx" />
+        <Select presentation="bottom-sheet">
+          <Select.Trigger className="w-60">
+            <Select.Value placeholder="Select an option" />
+            <Select.TriggerIndicator />
+          </Select.Trigger>
+          <Select.Portal>
+            <Select.Overlay className="bg-black/20" />
+            <Select.Content
+              presentation="bottom-sheet"
+              snapPoints={["60%", "80%"]}
+              enableDynamicSizing={false}
+              contentContainerClassName="h-full p-0"
+            >
+              <BottomSheetScrollView>
+                <Select.Item value="apple" label="Apple" />
+                <Select.Item value="orange" label="Orange" />
+                <Select.Item value="banana" label="Banana" />
+                <Select.Item value="watermelon" label="Watermelon" />
+                <Select.Item value="peach" label="Peach" />
+                <Select.Item value="peach" label="Peach" />
+              </BottomSheetScrollView>
+            </Select.Content>
+          </Select.Portal>
+        </Select>
       </View>
     </>
   );

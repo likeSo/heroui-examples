@@ -16,6 +16,7 @@ export default function TabOneScreen() {
       <TextField isRequired>
         <Label>Email</Label>
         <Input
+          className="android:shadow-black-50 android:shadow-md"
           placeholder="Enter your email"
           keyboardType="email-address"
           autoCapitalize="none"
